@@ -393,7 +393,7 @@ class _RecordPageState extends State<RecordPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Image(
-                    image: AssetImage('guitar_image_faded.png'),
+                    image: AssetImage('images/guitar_image_faded.png'),
                     height: double.infinity,
                   ),
                   SizedBox(

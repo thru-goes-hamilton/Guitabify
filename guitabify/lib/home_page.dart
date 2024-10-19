@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const SizedBox(height: 220,),
                   const Image(
-                    image: AssetImage('guitabify.png',),
+                    image: AssetImage('images/guitabify.png',),
                     height: 50,
                     width: 360,
                     alignment: Alignment.centerLeft,
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Expanded(child: SizedBox()),
               const Image(
-                image: AssetImage('guitar_image.png'),
+                image: AssetImage('images/guitar_image.png'),
                 height: double.infinity,
               ),
               const SizedBox(width: 162,)

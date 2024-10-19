@@ -260,7 +260,7 @@ class _TabPageState extends State<TabPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Image(
-                    image: AssetImage('guitar_image_faded.png'),
+                    image: AssetImage('images/guitar_image_faded.png'),
                     height: double.infinity,
                   ),
                   SizedBox(width: 162)

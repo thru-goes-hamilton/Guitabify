@@ -17,7 +17,7 @@ class Button1 extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         image: const DecorationImage(
-          image: AssetImage("guitargradient.jpg"),
+          image: AssetImage("images/guitargradient.jpg"),
           fit: BoxFit.cover,
         ),
       ),
