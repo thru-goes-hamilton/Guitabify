@@ -16,6 +16,8 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    print("Upload endpoint hit!")  # Debug print
+
     if 'audio' not in request.files:
         return "No file part", 400
     
@@ -58,4 +60,4 @@ def delete_file():
         return jsonify({'error': 'No file name provided'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
