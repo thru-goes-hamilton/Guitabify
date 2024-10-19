@@ -75,7 +75,7 @@ class _TabPageState extends State<TabPage> {
     try {
       // Replace with your server's endpoint
       final response = await http
-          .get(Uri.parse('http://127.0.0.1:5000/notes?file_name=$fileName'));
+          .get(Uri.parse('https://guitabify-backend.onrender.com/notes?file_name=$fileName'));
 
       if (response.statusCode == 200) {
         // Decode the response JSON
@@ -107,7 +107,7 @@ class _TabPageState extends State<TabPage> {
 
       // Send DELETE request to the server with the file name as a query parameter
       final response = await http.delete(
-        Uri.parse('http://127.0.0.1:5000/delete?file_name=$fileName'),
+        Uri.parse('https://guitabify-backend.onrender.com/delete?file_name=$fileName'),
       );
 
       if (response.statusCode == 200) {

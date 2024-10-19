@@ -145,7 +145,7 @@ class _RecordPageState extends State<RecordPage> {
 
       fileName = generateRandomFileName();
       // Create a multipart request
-      var uri = Uri.parse('http://127.0.0.1:5000/upload');
+      var uri = Uri.parse('https://guitabify-backend.onrender.com/upload');
       var request = http.MultipartRequest('POST', uri);
 
       // Add the audio bytes to the request (using random1 as filename for now)
