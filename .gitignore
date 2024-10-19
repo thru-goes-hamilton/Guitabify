@@ -1,0 +1,17 @@
+# .gitignore for guitabify_app
+# Ignoring unnecessary files from both frontend and backend
+
+# Flutter (Frontend) Ignored Files
+guitabify/build/
+guitabify/.dart_tool/
+guitabify/.packages
+guitabify/.flutter-plugins
+guitabify/pubspec.lock
+
+# Python (Backend) Ignored Files
+backend/__pycache__/
+backend/guitabify_server_venv/
+
+# General Ignored Files
+.DS_Store
+*.log
