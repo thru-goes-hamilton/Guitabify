@@ -99,7 +99,7 @@ class _RecordPageState extends State<RecordPage> {
 
         // Create a multipart request
         var request = http.MultipartRequest(
-            'POST', Uri.parse('http://127.0.0.1:5000/upload'));
+            'POST', Uri.parse('https://guitabify-backend.onrender.com/upload'));
 
         // Attach file as bytes
         request.files.add(
