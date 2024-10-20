@@ -75,8 +75,24 @@ def analyze_midi_guitar(midi_data):
     return tab_data
 
 def transcribe(file_path):
+
+    if os.path.exists(file_path):
+        print("File exists!")
+    else:
+        print("File does not exist or incorrect file path.")
+
+    if os.access(file_path, os.R_OK):
+        print("File is readable.")
+    else:
+        print("File is not readable. Check file permissions.")
+
+    try:
+        y, sr = librosa.load(file_path)
+    except Exception as e:
+        print(f"Error loading file: {e}")
+
     # Load the audio file
-    y, sr = librosa.load(file_path)
+    # y, sr = librosa.load(file_path)
 
     # Apply bandpass filter
     lowcut = 80  # Hz
