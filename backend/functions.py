@@ -90,6 +90,10 @@ def transcribe(file_path):
         y, sr = librosa.load(file_path)
     except Exception as e:
         print(f"Error loading file: {e}")
+    except SystemExit as e:
+        print(f"SystemExit occurred: {e}")
+    except BaseException as e:
+        print(f"Unhandled exception: {e}")
 
     # Load the audio file
     # y, sr = librosa.load(file_path)
