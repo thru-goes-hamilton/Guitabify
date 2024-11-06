@@ -38,6 +38,18 @@ for filename in os.listdir(UPLOAD_FOLDER):
 @app.post("/upload")
 async def upload_file(audio: UploadFile = File(...)) -> Dict[str, str]:
     print("Upload endpoint hit!")  # Debug print
+    # List all files in the UPLOAD_FOLDER
+    for filename in os.listdir(UPLOAD_FOLDER):
+        if os.path.isfile(os.path.join(UPLOAD_FOLDER, filename)):
+            print(filename)
+
+    # Delete all files in the UPLOAD_FOLDER
+    for filename in os.listdir(UPLOAD_FOLDER):
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
+        # Check if it's a file and delete it
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            print(f"Deleted file: {filename}")
 
     if not audio:
         raise HTTPException(status_code=400, detail="No file provided")
