@@ -1,11 +1,19 @@
 import os
-import random
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from typing import Dict, List, Tuple
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from functions import transcribe
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Set the directory to save uploaded audio files
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'data', 'uploaded_audio')
@@ -14,50 +22,58 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'data', 'uploaded_audio')
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
+@app.post("/upload")
+async def upload_file(audio: UploadFile = File(...)) -> Dict[str, str]:
     print("Upload endpoint hit!")  # Debug print
 
-    if 'audio' not in request.files:
-        return "No file part", 400
+    if not audio:
+        raise HTTPException(status_code=400, detail="No file provided")
     
-    audio = request.files['audio']
     if audio.filename == '':
-        return "No selected file", 400
+        raise HTTPException(status_code=400, detail="No selected file")
     
     # Save the file in the data/uploaded_audio directory
     audio_path = os.path.join(UPLOAD_FOLDER, audio.filename)
-    audio.save(audio_path)
     
-    return f'File uploaded successfully to {audio_path}', 200
+    try:
+        contents = await audio.read()
+        with open(audio_path, 'wb') as f:
+            f.write(contents)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error saving file: {str(e)}")
+    
+    return {"message": f"File uploaded successfully to {audio_path}"}
 
-# Endpoint to generate random notes
-@app.route('/notes', methods=['GET'])
-def get_notes():
-    file_name = request.args.get('file_name')
-    if file_name:
-        audio_path = os.path.join(UPLOAD_FOLDER, file_name)
-        if os.path.exists(audio_path):
-            list1, list2 = transcribe(audio_path)
-            return jsonify({'list1': list1, 'list2': list2})
-        else:
-            return jsonify({'error': 'File not found'}), 404
-    else:
-        return jsonify({'error': 'No file name provided'}), 400
+@app.get("/notes")
+async def get_notes(file_name: str) -> Dict[str, List[str]]:
+    if not file_name:
+        raise HTTPException(status_code=400, detail="No file name provided")
+    
+    audio_path = os.path.join(UPLOAD_FOLDER, file_name)
+    if not os.path.exists(audio_path):
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    try:
+        list1, list2 = transcribe(audio_path)
+        return {"list1": list1, "list2": list2}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
-# Endpoint to delete an uploaded file
-@app.route('/delete', methods=['DELETE'])
-def delete_file():
-    file_name = request.args.get('file_name')
-    if file_name:
-        file_path = os.path.join(UPLOAD_FOLDER, file_name)
-        if os.path.exists(file_path):
-            os.remove(file_path)  # Delete the file
-            return jsonify({'message': f'File {file_name} deleted successfully'}), 200
-        else:
-            return jsonify({'error': 'File not found'}), 404
-    else:
-        return jsonify({'error': 'No file name provided'}), 400
+@app.delete("/delete")
+async def delete_file(file_name: str) -> Dict[str, str]:
+    if not file_name:
+        raise HTTPException(status_code=400, detail="No file name provided")
+    
+    file_path = os.path.join(UPLOAD_FOLDER, file_name)
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    try:
+        os.remove(file_path)  # Delete the file
+        return {"message": f"File {file_name} deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deleting file: {str(e)}")
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000)

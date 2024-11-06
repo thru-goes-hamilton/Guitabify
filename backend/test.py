@@ -13,5 +13,5 @@ def transcribe(audio_path):
 
 
 if __name__=='__main__':
-    y ,sr= transcribe(r'data\uploaded_audio\recording_8g5j.wav')
+    y ,sr= transcribe(r'data\uploaded_audio\c-chord.wav')
     print(y[0])
