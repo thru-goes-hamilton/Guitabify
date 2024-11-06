@@ -42,6 +42,9 @@ async def upload_file(audio: UploadFile = File(...)) -> Dict[str, str]:
     for filename in os.listdir(UPLOAD_FOLDER):
         if os.path.isfile(os.path.join(UPLOAD_FOLDER, filename)):
             print(filename)
+        else:
+            print(f"Directory: {filename}")
+    
 
     # Delete all files in the UPLOAD_FOLDER
     for filename in os.listdir(UPLOAD_FOLDER):
