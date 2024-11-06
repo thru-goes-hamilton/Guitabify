@@ -101,5 +101,5 @@ def transcribe(file_path):
     
     print(f"No. of notes detected: {len(list1)}")
 
-    list2 = ["1" for _ in range(len(list1) - 1)]
+    list2 = [1 for _ in range(len(list1) - 1)]
     return list1, list2

@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from functions import transcribe
@@ -73,7 +73,7 @@ async def upload_file(audio: UploadFile = File(...)) -> Dict[str, str]:
     return {"message": f"File uploaded successfully to {audio_path}"}
 
 @app.get("/notes")
-async def get_notes(file_name: str) -> Dict[str, List[str]]:
+async def get_notes(file_name: str) -> Dict[str, Union[List[str], List[int]]]:
     if not file_name:
         raise HTTPException(status_code=400, detail="No file name provided")
     
