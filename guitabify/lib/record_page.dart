@@ -282,7 +282,8 @@ class _RecordPageState extends State<RecordPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                       children: [
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -332,9 +333,18 @@ class _RecordPageState extends State<RecordPage> {
                                       })
                               ],
                             ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Button1(
+                              buttonText: 'Upload',
+                              onPressed: () {
+                                uploadRecordedAudio(context);
+                                // Navigator.pushNamed(context, TabPage.id);
+                              },
+                            ),
                           ],
                         ),
-                        const Expanded(child: SizedBox()),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -346,33 +356,23 @@ class _RecordPageState extends State<RecordPage> {
                               'Upload file (.mp3, .wav)',
                               style: kSubtitleStyle,
                             ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Button1(
+                              buttonText: 'Upload audio',
+                              onPressed: () {
+                                uploadAudio(context);
+                              },
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
                           ],
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Button1(
-                          buttonText: 'Upload',
-                          onPressed: () {
-                            uploadRecordedAudio(context);
-                            // Navigator.pushNamed(context, TabPage.id);
-                          },
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Button1(
-                          buttonText: 'Upload audio',
-                          onPressed: () {
-                            uploadAudio(context);
-                          },
-                        ),
-                      ],
-                    ),
+                    
                     SizedBox(
                       height: 30,
                     ),
