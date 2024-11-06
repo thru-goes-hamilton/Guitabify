@@ -83,6 +83,8 @@ async def get_notes(file_name: str) -> Dict[str, List[str]]:
     
     try:
         list1, list2 = transcribe(audio_path)
+        print(list1)
+        print(list2)
         return {"list1": list1, "list2": list2}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
