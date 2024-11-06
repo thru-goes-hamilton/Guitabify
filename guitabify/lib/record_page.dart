@@ -112,11 +112,13 @@ class _RecordPageState extends State<RecordPage> {
         print('Status Code: ${response.statusCode}');
 
         if (response.statusCode == 200) {
-          print('File uploaded successfully');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('File uploaded successfully')),
+          );
           // Navigate to next page
           Navigator.pop(context); // Close the loading dialog
         } else {
-          print('Failed to upload file');
+          print('File failed to upload file');
           Navigator.pop(context); // Close the loading dialog
         }
       } else {
@@ -276,29 +278,37 @@ class _RecordPageState extends State<RecordPage> {
           color: Colors.black,
           child: Stack(
             children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image(
+                    image: AssetImage('images/guitar_image_faded.png'),
+                    height: double.infinity,
+                  ),
+                  SizedBox(
+                    width: 162,
+                  )
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.all(64.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(height: 80,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
                       children: [
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const SizedBox(
-                              height: 80,
-                            ),
+                            
                             const Text(
                               'Record audio',
                               style: kSubtitleStyle,
                             ),
-                            const SizedBox(
-                              height: 24,
-                            ),
+                            SizedBox(height: 24,),
                             Row(
                               children: [
                                 FloatingActionButton(
@@ -333,9 +343,7 @@ class _RecordPageState extends State<RecordPage> {
                                       })
                               ],
                             ),
-                            const SizedBox(
-                              height: 24,
-                            ),
+                            SizedBox(height: 24,),
                             Button1(
                               buttonText: 'Upload',
                               onPressed: () {
@@ -346,33 +354,25 @@ class _RecordPageState extends State<RecordPage> {
                           ],
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 80,
-                            ),
                             Text(
                               'Upload file (.mp3, .wav)',
                               style: kSubtitleStyle,
                             ),
-                            const SizedBox(
-                              height: 24,
-                            ),
+                            SizedBox(height: 104,),
                             Button1(
                               buttonText: 'Upload audio',
                               onPressed: () {
                                 uploadAudio(context);
                               },
                             ),
-                            const SizedBox(
-                              height: 24,
-                            ),
+                            
                           ],
                         ),
                       ],
                     ),
-                    
                     SizedBox(
                       height: 30,
                     ),
@@ -388,18 +388,6 @@ class _RecordPageState extends State<RecordPage> {
                         })
                   ],
                 ),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Image(
-                    image: AssetImage('images/guitar_image_faded.png'),
-                    height: double.infinity,
-                  ),
-                  SizedBox(
-                    width: 162,
-                  )
-                ],
               ),
             ],
           ),
