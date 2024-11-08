@@ -11,6 +11,7 @@ guitabify/pubspec.lock
 # Python (Backend) Ignored Files
 backend/__pycache__/
 backend/guitabify_server_venv/
+backend/datasets/
 
 # General Ignored Files
 .DS_Store
