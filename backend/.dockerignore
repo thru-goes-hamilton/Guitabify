@@ -1,0 +1,9 @@
+# Exclude the datasets folder
+datasets/
+
+# Exclude individual files
+transcription_model_attempt1.ipynb
+transcription_model_attempt2.ipynb
+denoising.ipynb
+basic_pitch_sample.ipynb
+c-chord.wav
