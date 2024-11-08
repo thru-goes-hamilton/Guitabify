@@ -1,4 +1,4 @@
-# Guitabify: A Guitar Trancription application
+# Guitabify: A Guitar Transcription application
 
 Guitabify aims to convert guitar audio to tabs(notes) using AI. It is aimed to be user-friendly application for guitarist to upload audio files or record audio while playing and get the notes that they have played in the form of tabs.
 <br><br>**Do you want to know the guitar notes for some guitar audio or song? Just upload its audio in Guitabify!** [Visit Guitabify](https://guitabify.web.app/)<br><br>
