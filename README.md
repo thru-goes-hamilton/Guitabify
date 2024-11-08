@@ -1,6 +1,12 @@
 # Guitabify: A Guitar Trancription application
 
-Guitabify aims to convert guitar audio to tabs(notes) using AI. It is aimed to be user-friendly application for guitarist to upload audio files or record audio while playing and get the notes that they have played in the form of tabs.<br>
+Guitabify aims to convert guitar audio to tabs(notes) using AI. It is aimed to be user-friendly application for guitarist to upload audio files or record audio while playing and get the notes that they have played in the form of tabs.
+<br><br>**Do you want to know the guitar notes for some guitar audio or song? Just upload its audio in Guitabify!** [Visit Guitabify]([https://bruno-v2.web.app/](https://guitabify.web.app/))<br><br>
+<p>
+  <img src="[https://github.com/user-attachments/assets/1c6a9b6d-ebaa-4a8c-b7e4-c8bcef27002a](https://github.com/user-attachments/assets/a9e2322e-5252-4c91-ae1f-77b16fc9d806)" width="850" height="500" /> 
+</p>
+<br>
+
 As of now 3 attempts have been tried for the underlying algorithm for transcribing music.
 1. Training a note classifier using ANN with custom recorded dataset(created a dataset from scratch).
 2. CNN based model architecture trained on Kaggle dataset.
@@ -8,13 +14,6 @@ As of now 3 attempts have been tried for the underlying algorithm for transcribi
 
 These appraoches were ideated after going through literature in the topics of AMT(Automatic Music Transcription), monophonic and polyphonic music transcription.
 Currently the guitabify application used the Basic Pitch model for prediction.
-
-<br><br>**Do you want to know the guitar notes for some song? Just upload its audio!** [Visit Guitabify](https://bruno-v2.web.app/)<br><br>
-
-<p>
-  <img src="https://github.com/user-attachments/assets/1c6a9b6d-ebaa-4a8c-b7e4-c8bcef27002a" width="850" height="500" /> 
-</p>
-
 
 ## Features
 - Memory of the current chat, can maintain context through a chat.
