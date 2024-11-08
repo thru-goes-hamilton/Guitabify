@@ -1,11 +1,15 @@
 # Guitabify: A Guitar Trancription application
 
 Guitabify aims to convert guitar audio to tabs(notes) using AI. It is aimed to be user-friendly application for guitarist to upload audio files or record audio while playing and get the notes that they have played in the form of tabs.
-<br><br>**Do you want to know the guitar notes for some guitar audio or song? Just upload its audio in Guitabify!** [Visit Guitabify]([https://bruno-v2.web.app/](https://guitabify.web.app/))<br><br>
+<br><br>**Do you want to know the guitar notes for some guitar audio or song? Just upload its audio in Guitabify!** [Visit Guitabify](https://guitabify.web.app/)<br><br>
 <p>
-  <img src="[https://github.com/user-attachments/assets/1c6a9b6d-ebaa-4a8c-b7e4-c8bcef27002a](https://github.com/user-attachments/assets/a9e2322e-5252-4c91-ae1f-77b16fc9d806)" width="850" height="500" /> 
+  <img src="https://github.com/user-attachments/assets/a9e2322e-5252-4c91-ae1f-77b16fc9d806" width="1000" height="500" /> 
 </p>
 <br>
+<p>
+  <img src="https://github.com/user-attachments/assets/4a4083d7-ea50-404d-b10f-c01354f985fd" width="500" height="250" /> 
+  <img src="https://github.com/user-attachments/assets/ddc47059-0bad-43cb-9a98-1d47ef76f8bc" width="500" height="250" /> 
+</p>
 
 As of now 3 attempts have been tried for the underlying algorithm for transcribing music.
 1. Training a note classifier using ANN with custom recorded dataset(created a dataset from scratch).
