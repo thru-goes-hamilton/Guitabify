@@ -35,27 +35,44 @@ Note: Saving audios and tabs, and authentication is yet to be included in the ap
 <br><br>
 
 ## Note Classifier with custom recorded dataset
+Example notebook at `transcription_model_attempt1.ipynb`.<br>
+Dataset link Locally: `dataset`/`Custom Recorded - Notes(single,0-4)`<br>
 Trained a note classifier model using custom recorder dataset for all possible single notes in the fret broard from fret 1 to 4. Predict the notes for an audio by performing onsset detection to split the it into chunks and then classify the notes. The time gap between the detected notes is binned to whole inntegers corresponding second to capture temporal information. Locally: dataset/Kaggle Dataset
-<br>
 ### Training
 - Onset detection is performed on each datapoint collected dataset, chunked to ensure silent audio parts are removed.
 - The chunks are padded or trimmed to required shape.
-- Mel-Frequency Cepstral Coefficients (MFCCs) are calculated for each chunk and fed to the model
-- A neural network with 5 Dense layers and Leaky Relu is trained to predict the class (Note: due to small dataset, train dataset is used for both train test and val )
-<br>
+- Mel-Frequency Cepstral Coefficients (MFCCs) are calculated for each chunk and fed to the model.
+- A neural network with 5 Dense layers and Leaky Relu is trained to predict the class (Note: due to small dataset, train dataset is used for both train test and val).
 ### Prediction
 - Onset detection is performed an audio file to split it into chunks. Time gap between onset is binned based on ratio into integers.
-- Chunks are padded with 0 or trimmed, then Mel-Frequency Cepstral Coefficients (MFCCs) are calculated for each chunk and fed to the model
-- Model predicts notes for each set of MFCC
+- Chunks are padded with 0 or trimmed, then Mel-Frequency Cepstral Coefficients (MFCCs) are calculated for each chunk and fed to the model.
+- Model predicts notes for each set of MFCC.
 - Predicted class is decoded from the model output and shown for each note.
-- Result is two list one for notes and another for the ratio of timegap between the notes being played
-<br>
+- Result is two list one for notes and another for the ratio of timegap between the notes being played.
 ### Conclusion
 The result are very close to the expected notes when testing on completely new data that is within the 0-4 fret range and is monophonic(single note). However dataset need to be expanded and more extensive testing can cause the model to break.
-<br>
 ### Future improvements
 An approach to use frequency-domain information directly with a CNN could lead to better results as information might be lost while performing MFCC. Increasing dataset could improve the results.
 <br><br>
+
+## Custom CNN model trained on Kaggle dataset
+Example notebook at `transcription_model_attempt2.ipynb`<br>
+Dataset link Locally: `dataset`/`Kaggle Dataset`<br>
+Trained a note classifier with CNN architecture using an acoustic guitar dataset and perform inference on audio file with trained model.
+### Training
+Audio is converted from time-domain to frequency domain using mel_spectogram.
+The mel_spectorgram values are normalized.
+The normalized mel_spectogram values are passed through 4 convolutional blocks, a flatten layer followed by fully connected network of 2 layers.
+### Prediction
+- Audio is converted again from time-domain to frequency-domain using mel_spectogram.
+- Onset detection(detecting when a note is played) is performed using frequency domain data and split into chunks of data.
+- Each chunk is either cropped or padded with 0s until they are of the required input size of the model.
+- Inference on model.
+- Predicted class is decoded from the model output and shown for each note.
+### Conclusion
+The results predicted are not as expected, some notes are close while most are completely off. Both model complexity and dataset have to be improved to better the result.
+### Future improvements
+One approach forward could be to improve the dataset and scale up the network to see if performance improves. Another alternative is to reimplementing a different architecture (basic pitch) that can handle onset and note detection in one pipeline with high quality personalised dataset
 
 ## Basic Pitch
 Basic Pitch is a open-source, pretrained model with a CNN based architecture to predict midi file from an audio. It was created by Spotify's Audio Intelligence Lab. It predicts 3 outputs, note, onset and pitch.
