@@ -1,6 +1,6 @@
 # Guitabify: A Guitar Transcription application
 
-Guitabify aims to convert guitar audio to tabs(notes) using AI. It is aimed to be user-friendly application for guitarist to upload audio files or record audio while playing and get the notes that they have played in the form of tabs.
+Guitabify is a user-friendly application that aims to convert guitar audio to tabs(notes) using AI. Guitarists can record a guitar audio or upload recorded audio and get the tabs of the notes.
 <br><br>**Do you want to know the guitar notes for some guitar audio or song? Just upload its audio in Guitabify!** [Visit Guitabify](https://guitabify.web.app/)<br><br>
 <p>
   <img src="https://github.com/user-attachments/assets/a9e2322e-5252-4c91-ae1f-77b16fc9d806" width="1000" height="500" /> 
@@ -14,14 +14,15 @@ Guitabify aims to convert guitar audio to tabs(notes) using AI. It is aimed to b
 As of now, 3 approaches have been tried for the underlying algorithm for transcribing music.
 1. Training a note classifier using ANN with custom recorded dataset(created a dataset from scratch).
 2. CNN based model architecture trained on Kaggle dataset.
-3. Pretrained model called Basic Pitch for audio-to-midi(a file format to represent what note is played and when it is played).<br>
+3. Pretrained model called Basic Pitch for audio-to-midi(midi is a file format to represent what note is played and when it is played).<br>
 
-These approaches were ideated after going through literature in the topics of AMT(Automatic Music Transcription), monophonic and polyphonic music transcription. Automatic Music Transcription is still a complex research problem that is yet to be solved because of nature of music audio. It varies a lot based on where its recorded and many notes sound very similar and have very slight difference.
+These approaches were ideated after going through literature in the topics of AMT(Automatic Music Transcription), monophonic and polyphonic music transcription. Automatic Music Transcription is still a challenging research problem that is yet to be solved because of complex nature of music audio. It varies based on the environment it is recorded. Many notes sound very similar and have very slight difference that it takes years of practice to identify.
 
-Currently the guitabify application used the Basic Pitch approach for prediction as it gave the best result.
+Currently the guitabify application used the Basic Pitch approach for prediction as this approach gave the best result.
 <br><br>
 ## Features
-
+- Record guitar audio by playing.
+- Upload pre-recorded guitar audio
 - Display tabs from recorded or uploaded audio.
 - Can handle only monophonic transcriptions. 
 
@@ -34,10 +35,10 @@ Note: Saving audios and tabs, and authentication is yet to be included in the ap
 - If you want to record again, click on Record button
 <br><br>
 
-## Note Classifier with custom recorded dataset
+## Approach 1: Note Classifier with custom recorded dataset
 Example notebook at `transcription_model_attempt1.ipynb`.<br>
 Dataset link Locally: `dataset`/`Custom Recorded - Notes(single,0-4)`<br>
-Trained a note classifier model using custom recorder dataset for all possible single notes in the fret broard from fret 1 to 4. Predict the notes for an audio by performing onsset detection to split the it into chunks and then classify the notes. The time gap between the detected notes is binned to whole inntegers corresponding second to capture temporal information. Locally: dataset/Kaggle Dataset
+Trained a note classificaton model using custom recorder dataset for all possible single notes(monophonic notes) in the fret broard from fret 1 to 4. Predict the notes for an audio by performing onset detection to split it into chunks and then classify the notes. The time gap between the detected notes is binned to whole numbers(seconds) to capture temporal information. Locally: dataset/Kaggle Dataset
 ### Training
 - Onset detection is performed on each datapoint collected dataset, chunked to ensure silent audio parts are removed.
 - The chunks are padded or trimmed to required shape.
@@ -55,7 +56,7 @@ The result are very close to the expected notes when testing on completely new d
 An approach to use frequency-domain information directly with a CNN could lead to better results as information might be lost while performing MFCC. Increasing dataset could improve the results.
 <br><br>
 
-## Custom CNN model trained on Kaggle dataset
+## Approach 2: Custom CNN model trained on Kaggle dataset
 Example notebook at `transcription_model_attempt2.ipynb`<br>
 Dataset link Locally: `dataset`/`Kaggle Dataset`<br>
 Trained a note classifier with CNN architecture using an acoustic guitar dataset and perform inference on audio file with trained model.
@@ -74,7 +75,7 @@ The results predicted are not as expected, some notes are close while most are c
 ### Future improvements
 One approach forward could be to improve the dataset and scale up the network to see if performance improves. Another alternative is to reimplementing a different architecture (basic pitch) that can handle onset and note detection in one pipeline with high quality personalised dataset
 
-## Basic Pitch
+## Approach 3: Basic Pitch
 Basic Pitch is a open-source, pretrained model with a CNN based architecture to predict midi file from an audio. It was created by Spotify's Audio Intelligence Lab. It predicts 3 outputs, note, onset and pitch.
 <br>
 ### Architecture
