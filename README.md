@@ -107,7 +107,7 @@ Basic Pitch is a open-source, pretrained model with a CNN based architecture to 
 ## Upcoming features in Guitabify
 - Including authentication
 - Saving audio files and tabs
-- Imporve algorithm by
+- Improve algorithm by
   - creating bigger custom dataset
   - train with basic pitch model architecture on custom dataset(currently under preparation)
 
